@@ -65,7 +65,7 @@ var manifest = {
     },
     "changeReplaceColor": {
       "type": "bool",
-      "default": true,
+      "default": false,
       "description": "Use a different color for replace sections."
     },
     "loadLimit": {
