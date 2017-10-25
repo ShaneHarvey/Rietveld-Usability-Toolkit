@@ -187,19 +187,21 @@ function updateCodeLines() {
   // TODO: I shouldn't have to worry about calling taglinenumbers... it should just happen.
   tagLineNumbers();
 
-  newLines = document.querySelectorAll('.rb-innerCodeNew:not(.rb-codeProcessed)');
-  for (var i = 0; i < newLines.length; i++) {
-    line = newLines[i];
+  // Update highlight of 'old' code lines in patch.
+  var oldLines = $("td.oldequal > span.rb-code:not(.rb-codeProcessed)");
+  oldLines.each(i => {
+    var line = oldLines[i];
     line.classList.add('rb-codeProcessed');
     appendCodeRow(codeLines, 0, line);
-  }
+  });
 
-  oldLines = document.querySelectorAll('.rb-innerCodeOld:not(.rb-codeProcessed)');
-  for (var i = 0; i < oldLines.length; i++) {
-    line = oldLines[i];
+  // Update highlight of 'new' code lines in patch.
+  var newLines = $("td.newequal > span.rb-code:not(.rb-codeProcessed)");
+  newLines.each(i => {
+    var line = newLines[i];
     line.classList.add('rb-codeProcessed');
     appendCodeRow(codeLines, 1, line);
-  }
+  });
 
   codeLines.sort(function(l, r) { return l.column != r.column ? l.column - r.column : l.line - r.line; });
 }
