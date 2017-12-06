@@ -116,6 +116,10 @@ function updateCodelineColors() {
     html += createStyle(domInspector.codelineNewInsert(), 'background-color', toColor(insertColor));
 
     if(items['improveDarkSyntaxDiffColors']){
+
+        /**
+         * Code diff color enhancements.
+         */
         insertColor = [152, 209, 102];
         newReplaceColor = [152, 209, 102];
 
@@ -126,6 +130,26 @@ function updateCodelineColors() {
         html += createStyle(domInspector.codelineNewReplaceDark(), 'background-color', toColor(newReplaceColor, 0.3));
         html += createStyle(domInspector.codelineOldReplaceLight(), 'background-color', toColor(oldReplaceColor, 0.2));
         html += createStyle(domInspector.codelineNewReplaceLight(), 'background-color', toColor(newReplaceColor, 0.2));
+
+        /**
+         * Inline commenting color enhancements.
+         */
+
+        // Better comment text colors.
+        let inlineCommentBg = [180, 180, 180];
+        let inlineCommentText = [30, 30, 30];
+        html += createStyle("tr.inline-comments > td", 'background-color', toColor(inlineCommentBg, 1.0));
+        html += createStyle("div.inline-comment-title > span", 'color', toColor(inlineCommentText, 1.0));
+        html += createStyle("div.comment-border", 'color', toColor(inlineCommentText, 1.0));
+        html += createStyle("div.comment-border", 'border-color', toColor([200, 200, 200], 1.0));
+
+        // Better link colors.
+        html += createStyle("tr.inline-comments a", 'color', toColor([81, 125, 193], 1.0));
+
+        // Better commenting input form background color.
+        html += createStyle("tr.inline-comments textarea", 'background-color', toColor([222, 222, 222], 1.0));
+
+
     } else{
         html += createStyle(domInspector.codelineOldDelete(), 'background-color', toColor(deleteColor));
         html += createStyle(domInspector.codelineNewInsert(), 'background-color', toColor(insertColor));
