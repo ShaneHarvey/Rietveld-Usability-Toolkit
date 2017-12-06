@@ -29,7 +29,9 @@ function changeStyle(id, style) {
 
 function createStyle(selector, attr, value) {
   if (typeof(selector) == 'string') selector = [selector];
-  return $.map(selector, function(sel) { return sel + '{' + attr + ':' + value + ' !important' + '}\n'; }).join('\n');
+  return $.map(selector, function(sel) {
+    return sel + '{' + attr + ':' + value + ' !important' + '}\n';
+  }).join('\n');
 }
 
 function updateCodelineFont() {
@@ -61,7 +63,7 @@ chrome.storage.onChanged.addListener(function(changes, namespace) {
 }, ['codeFontSizeEnabled', 'codeFontSize']);
 
 function updateCodelineColors() {
-  chrome.storage.sync.get(['changeReplaceColor', 'colorBlindMode'] , function(items) {
+  chrome.storage.sync.get(['changeReplaceColor', 'colorBlindMode', 'improveDarkSyntaxDiffColors'] , function(items) {
     if (!items['changeReplaceColor'] && !items['colorBlindMode']) {
       changeStyle('codelineColors', '');
     }
@@ -96,19 +98,43 @@ function updateCodelineColors() {
     }
 
     function toColor(col, al) {
-      al = al || 0.0;
-      return 'rgb(' + String(Math.floor(col[0]  + (255 - col[0]) * al))
-          + ',' + String(Math.floor(col[1] + (255 - col[1]) * al)) + ','
-          + String(Math.floor(col[2] + (255 - col[2]) * al)) + ')';
+      al = al || 1.0;
+
+      let R = String(col[0]);
+      let G = String(col[1]);
+      let B = String(col[2]);
+      let A = al;
+
+      return 'rgba('+ R + ',' + G + "," + B + "," + A + ')';
+
+      // return 'rgb(' + String(Math.floor(col[0]  + (255 - col[0]) * al))
+      //     + ',' + String(Math.floor(col[1] + (255 - col[1]) * al)) + ','
+      //     + String(Math.floor(col[2] + (255 - col[2]) * al)) + ')';
     }
 
     html += createStyle(domInspector.codelineOldDelete(), 'background-color', toColor(deleteColor));
     html += createStyle(domInspector.codelineNewInsert(), 'background-color', toColor(insertColor));
 
-    html += createStyle(domInspector.codelineOldReplaceDark(), 'background-color', toColor(oldReplaceColor));
-    html += createStyle(domInspector.codelineNewReplaceDark(), 'background-color', toColor(newReplaceColor));
-    html += createStyle(domInspector.codelineOldReplaceLight(), 'background-color', toColor(oldReplaceColor, 0.7));
-    html += createStyle(domInspector.codelineNewReplaceLight(), 'background-color', toColor(newReplaceColor, 0.7));
+    if(items['improveDarkSyntaxDiffColors']){
+        insertColor = [152, 209, 102];
+        newReplaceColor = [152, 209, 102];
+
+        html += createStyle(domInspector.codelineOldDelete(), 'background-color', toColor(deleteColor, 0.3));
+        html += createStyle(domInspector.codelineNewInsert(), 'background-color', toColor(insertColor, 0.3));
+
+        html += createStyle(domInspector.codelineOldReplaceDark(), 'background-color', toColor(oldReplaceColor, 0.3));
+        html += createStyle(domInspector.codelineNewReplaceDark(), 'background-color', toColor(newReplaceColor, 0.3));
+        html += createStyle(domInspector.codelineOldReplaceLight(), 'background-color', toColor(oldReplaceColor, 0.2));
+        html += createStyle(domInspector.codelineNewReplaceLight(), 'background-color', toColor(newReplaceColor, 0.2));
+    } else{
+        html += createStyle(domInspector.codelineOldDelete(), 'background-color', toColor(deleteColor));
+        html += createStyle(domInspector.codelineNewInsert(), 'background-color', toColor(insertColor));
+
+        html += createStyle(domInspector.codelineOldReplaceDark(), 'background-color', toColor(oldReplaceColor));
+        html += createStyle(domInspector.codelineNewReplaceDark(), 'background-color', toColor(newReplaceColor));
+        html += createStyle(domInspector.codelineOldReplaceLight(), 'background-color', toColor(oldReplaceColor, 0.7));
+        html += createStyle(domInspector.codelineNewReplaceLight(), 'background-color', toColor(newReplaceColor, 0.7));
+    }
 
     changeStyle('codelineColors', html);
   });

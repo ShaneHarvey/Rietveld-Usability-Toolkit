@@ -103,6 +103,11 @@ var manifest = {
         "RDark"
           ]
     },
+    "improveDarkSyntaxDiffColors": {
+      "type" : "bool",
+      "default": false,
+      "description": "Improve dark syntax theme diff colors."
+    },
     "codeFontSizeEnabled": {
       "type": "bool",
       "default": false,

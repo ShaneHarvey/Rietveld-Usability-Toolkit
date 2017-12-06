@@ -203,6 +203,8 @@ function updateCodeLines() {
     appendCodeRow(codeLines, 1, line);
   });
 
+  // TODO: Fix syntax highlighting of changed/replaced code sections.
+
   codeLines.sort(function(l, r) { return l.column != r.column ? l.column - r.column : l.line - r.line; });
 }
 timingDecorator('updateCodeLines')
