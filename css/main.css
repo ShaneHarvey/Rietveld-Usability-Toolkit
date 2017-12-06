@@ -85,3 +85,7 @@
   -webkit-user-select: none;
   user-select: none;
 }
+
+.rb-codelineOld, .rb-codelineNew{
+  background-color:transparent !important;
+}
