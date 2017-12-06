@@ -63,7 +63,12 @@ chrome.storage.onChanged.addListener(function(changes, namespace) {
 }, ['codeFontSizeEnabled', 'codeFontSize']);
 
 function updateCodelineColors() {
-  chrome.storage.sync.get(['changeReplaceColor', 'colorBlindMode', 'improveDarkSyntaxDiffColors'] , function(items) {
+  var itemsToGet = ['changeReplaceColor',
+                    'colorBlindMode',
+                    'improveDarkSyntaxDiffColors',
+                    'turnLightsDown'];
+
+  chrome.storage.sync.get(itemsToGet, function(items) {
     if (!items['changeReplaceColor'] && !items['colorBlindMode']) {
       changeStyle('codelineColors', '');
     }
@@ -115,6 +120,13 @@ function updateCodelineColors() {
     html += createStyle(domInspector.codelineOldDelete(), 'background-color', toColor(deleteColor));
     html += createStyle(domInspector.codelineNewInsert(), 'background-color', toColor(insertColor));
 
+
+    if(items['turnLightsDown']){
+      html += createStyle("body", 'background-color', toColor([30, 30, 30], 1.0));
+      html += createStyle("body", 'color', toColor([200, 200, 200], 1.0));
+      html += createStyle("a", 'color', toColor([81, 125, 193], 1.0));
+    }
+
     if(items['improveDarkSyntaxDiffColors']){
 
         /**
@@ -130,6 +142,10 @@ function updateCodelineColors() {
         html += createStyle(domInspector.codelineNewReplaceDark(), 'background-color', toColor(newReplaceColor, 0.3));
         html += createStyle(domInspector.codelineOldReplaceLight(), 'background-color', toColor(oldReplaceColor, 0.2));
         html += createStyle(domInspector.codelineNewReplaceLight(), 'background-color', toColor(newReplaceColor, 0.2));
+
+        html += createStyle("div.code", 'background-color', toColor([50, 50, 50], 1.0));
+        html += createStyle("div.code", 'border-color', toColor([100, 100, 100], 1.0));
+        html += createStyle("div.codenav", 'background-color', toColor([50, 50, 50], 1.0));
 
         /**
          * Inline commenting color enhancements.
@@ -148,7 +164,6 @@ function updateCodelineColors() {
 
         // Better commenting input form background color.
         html += createStyle("tr.inline-comments textarea", 'background-color', toColor([222, 222, 222], 1.0));
-
 
     } else{
         html += createStyle(domInspector.codelineOldDelete(), 'background-color', toColor(deleteColor));

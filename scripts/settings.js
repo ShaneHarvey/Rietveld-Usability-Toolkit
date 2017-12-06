@@ -108,6 +108,11 @@ var manifest = {
       "default": false,
       "description": "Improve dark syntax theme diff colors."
     },
+    "turnLightsDown": {
+      "type" : "bool",
+      "default": false,
+      "description": "Darken background colors."
+    },
     "codeFontSizeEnabled": {
       "type": "bool",
       "default": false,
