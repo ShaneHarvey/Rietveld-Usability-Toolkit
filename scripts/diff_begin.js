@@ -139,7 +139,11 @@ function updateCodelineColors() {
         html += createStyle(domInspector.codelineNewInsert(), 'background-color', toColor(insertColor, 0.3));
 
         html += createStyle(domInspector.codelineOldReplaceDark(), 'background-color', toColor(oldReplaceColor, 0.3));
+        html += createStyle(domInspector.codelineOldReplaceDark(), 'color', toColor([205 ,205 ,205 ], 1.0));
+
         html += createStyle(domInspector.codelineNewReplaceDark(), 'background-color', toColor(newReplaceColor, 0.3));
+        html += createStyle(domInspector.codelineNewReplaceDark(), 'color', toColor([205 ,205 ,205 ], 1.0));
+
         html += createStyle(domInspector.codelineOldReplaceLight(), 'background-color', toColor(oldReplaceColor, 0.2));
         html += createStyle(domInspector.codelineNewReplaceLight(), 'background-color', toColor(newReplaceColor, 0.2));
 
