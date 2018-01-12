@@ -22,5 +22,5 @@ Smarter Selection/Copy - Have you ever tried to copy code from a side-by-side di
 
 ### Installation
 
-To install, you can clone this repo and add it as a custom Chrome Extension by going to [chrome://extensions](chrome://extensions) in your browser (assuming you use Chrome) and clicking “Load unpacked extension…”, and then selecting the cloned repo's local directory. Once it’s loaded, you can tweak the local repo as you wish if you want to customize any other settings.
+To install, you can clone this repo and add it as a custom Chrome Extension by going to [chrome://extensions](chrome://extensions) in your browser (assuming you use Chrome) and clicking `Load unpacked extension…`, and then selecting the cloned repo's local directory. Once it’s loaded, you can tweak the local repo as you wish if you want to customize any other settings.
 
