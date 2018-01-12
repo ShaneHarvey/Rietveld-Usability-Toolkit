@@ -4,7 +4,7 @@ var manifest = {
   "settings": {
     "enableInlineDiffs": {
       "type": "bool",
-      "default": false,
+      "default": true,
       "description": "Enable inline diffs."
     },
     "createViewAllButtons": {
