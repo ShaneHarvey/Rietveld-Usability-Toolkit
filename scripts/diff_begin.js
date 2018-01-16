@@ -68,9 +68,16 @@ function updateCodelineColors() {
 
     var html = createStyle(domInspector.codelineLight(), 'display', 'inline-block');
 
+    /**
+      * Definition of colors for diff highlighting.
+      */
     var deleteColor = [255, 175, 175];
     var insertColor = [159, 255, 159];
     var replaceColor = [159, 175, 255];
+
+    // TODO: Consider adding option for more "faded" diff block colors. (schultz)
+    var deleteColorFaded = [255, 221, 225];
+    var insertColorFaded = [205, 253, 218];
 
     if (items['colorBlindMode']) {
       // From Cynthia Brewer's colorbrewer2.

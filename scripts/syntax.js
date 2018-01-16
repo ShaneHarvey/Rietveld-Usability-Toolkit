@@ -187,21 +187,27 @@ function updateCodeLines() {
   // TODO: I shouldn't have to worry about calling taglinenumbers... it should just happen.
   tagLineNumbers();
 
-  // Update highlight of 'old' code lines in patch.
-  var oldLines = $("td.oldequal > span.rb-code:not(.rb-codeProcessed)");
-  oldLines.each(i => {
-    var line = oldLines[i];
-    line.classList.add('rb-codeProcessed');
-    appendCodeRow(codeLines, 0, line);
-  });
+  function doHighlight(selector, column){
+    // Update highlight of selected code lines in patch.
+    var linesArr = $(selector + " > span.rb-code:not(.rb-codeProcessed)");
+    linesArr.each(i => {
+      var line = linesArr[i];
+      line.classList.add('rb-codeProcessed');
+      appendCodeRow(codeLines, column, line);
+    });
+  }
 
-  // Update highlight of 'new' code lines in patch.
-  var newLines = $("td.newequal > span.rb-code:not(.rb-codeProcessed)");
-  newLines.each(i => {
-    var line = newLines[i];
-    line.classList.add('rb-codeProcessed');
-    appendCodeRow(codeLines, 1, line);
-  });
+  // Syntax highlight all necessary code lines.
+  // This list might need to be updated in case I missed any. (Will Schultz)
+  doHighlight("td.oldequal", 0)
+  doHighlight("td.olddelete", 0)
+  doHighlight("td.newinsert", 1)
+  doHighlight("td.newreplace1", 1)
+  doHighlight("td.oldreplace1", 1)
+  doHighlight("td.oldreplace1", 0)
+  doHighlight("td.newreplace", 1)
+  doHighlight("td.oldreplace", 1)
+  doHighlight("td.newequal", 1)
 
   codeLines.sort(function(l, r) { return l.column != r.column ? l.column - r.column : l.line - r.line; });
 }
