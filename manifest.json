@@ -78,8 +78,8 @@
         "*://codereview.appspot.com/*/diff*",
         "*://codereview.chromium.org/*/diff*",
         "*://chromereviews.googleplex.com/*/diff*",
-        "*://webrtc-codereview.appspot.com/*/diff",
-        "*://mongodbcr.appspot.com/*"
+        "*://webrtc-codereview.appspot.com/*/diff*",
+        "*://mongodbcr.appspot.com/*/diff*"
       ],
       "js": [
         "scripts/diff_begin.js"
@@ -97,8 +97,8 @@
         "*://chromiumcodereview.appspot.com/*/diff*",
         "*://codereview.chromium.org/*/diff*",
         "*://chromereviews.googleplex.com/*/diff*",
-        "*://webrtc-codereview.appspot.com/*/diff",
-        "*://mongodbcr.appspot.com/*"
+        "*://webrtc-codereview.appspot.com/*/diff*",
+        "*://mongodbcr.appspot.com/*/diff*"
       ],
       "all_frames": true,
       "js": [
